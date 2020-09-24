@@ -80,6 +80,11 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		return bestMove;
 	}
 	
+	/**
+	 * Return the min value of game states starting from a certain depth.
+	 * @curState the current state 
+	 * @depth current depth in the game tree
+	 */
 	private double minPlayer(GameState curState, long depth) {
 		if (verbose) {
 //			System.out.println("Reaching depth " + depth);
@@ -105,6 +110,11 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		return bestVal;
 	}
 	
+	/**
+	 * Return the max value of game states starting from a certain depth.
+	 * @curState the current state 
+	 * @depth current depth in the game tree
+	 */
 	private double maxPlayer(GameState curState, long depth) {
 		if (verbose) {
 			System.out.println("Reaching depth " + depth);

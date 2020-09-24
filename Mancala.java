@@ -23,7 +23,8 @@ public class Mancala {
 		OneMovePlayer omp = new OneMovePlayer();
 //		Mancala m = new Mancala(hu, hu, 7,4,100000);
 //		Mancala m = new Mancala(mm, ab, 7,4,100000);
-		Mancala m = new Mancala(nrp, mm, 7,4,1000);
+//		Mancala m = new Mancala(nrp, mm, 7,4,1000);
+		Mancala m = new Mancala(hu, mm, 7,4,100000);
 		m.playGame();		
 	}
 
