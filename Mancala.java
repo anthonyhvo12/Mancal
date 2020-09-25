@@ -24,7 +24,8 @@ public class Mancala {
 //		Mancala m = new Mancala(hu, hu, 7,4,100000);
 //		Mancala m = new Mancala(mm, ab, 7,4,100000);
 //		Mancala m = new Mancala(nrp, mm, 7,4,1000);
-		Mancala m = new Mancala(hu, mm, 7,4,100000);
+//		Mancala m = new Mancala(nrp, mm, 7,4,1000);
+		Mancala m = new Mancala(ab, nrp, 7,4,1000);
 		m.playGame();		
 	}
 
@@ -78,19 +79,19 @@ public class Mancala {
 			}
 			
 			if(t.m == null){
-				System.out.println("Player took too long! " + t.p);
-				System.out.println("Making random move...");
+//				System.out.println("Player took too long! " + t.p);
+//				System.out.println("Making random move...");
 				t.m=randomPlayer.getMove(g,time);
 			}
 			g = g.makeMove(t.m);
 			g.printBoard();
-			System.out.println("Top is " + top);
-			System.out.println("Bottom is " + bottom);
+//			System.out.println("Top is " + top);
+//			System.out.println("Bottom is " + bottom);
 			
 		}
 		long finalScore = g.getFinalNetScore();
-		System.out.println( "Game over!");
-		System.out.println("Final net score is " + finalScore );
+//		System.out.println( "Game over!");
+//		System.out.println("Final net score is " + finalScore );
 		
 		if(finalScore > 0) {
 			System.out.println(bottom + " wins!");
@@ -117,7 +118,7 @@ public class Mancala {
 
 		@Override
 		public void run() {
-			System.out.println("getting move");
+//			System.out.println("getting move");
 			m = p.getMove(g, System.currentTimeMillis() + time);
 
 		}

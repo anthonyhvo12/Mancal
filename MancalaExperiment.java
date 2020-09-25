@@ -4,12 +4,99 @@ public class MancalaExperiment {
 
 	int size, startingStones,time;
 	
+	static double sumOfDepth3NodesAB = 0;
+	static double sumOfDepth3AvgBrachingFactor = 0;
+	static double sumOfDepth3NodesMM = 0;
+	static double sumOfDepth3EffectiveBrachingFactorAB = 0;
+	static double sumOfDepth6NodesAB = 0;
+	static double sumOfDepth6AvgBrachingFactor = 0;
+	static double sumOfDepth6NodesMM = 0;
+	static double sumOfDepth6EffectiveBrachingFactorAB = 0;
+	static double sumOfDepth12NodesAB = 0;
+	static double sumOfDepth12AvgBrachingFactor = 0;
+	static double sumOfDepth12NodesMM = 0;
+	static double sumOfDepth12EffectiveBrachingFactorAB = 0;
+	
 	public static void main(String[] args) {
 
-		MMMancaPlayer mm = new MMMancaPlayer("MinimaxPlayer");
-		ABMancaPlayer ab = new ABMancaPlayer("ABMancaPlayer");
-		MancalaExperiment m = new MancalaExperiment(mm, ab, 7, 4, 1500);
-		m.playGame();
+//		MMMancaPlayer mm = new MMMancaPlayer("MinimaxPlayer", 10);
+//		ABMancaPlayer ab = new ABMancaPlayer("ABMancaPlayer", 10);
+//		MancalaExperiment m = new MancalaExperiment(mm, ab, 7, 4, 100000);
+		//time
+		
+//		long startDepth12 =  System.currentTimeMillis();
+//		MMMancaPlayer mm = new MMMancaPlayer("MinimaxPlayer", 12);
+//		ABMancaPlayer ab = new ABMancaPlayer("ABMancaPlayer", 12);
+//		MancalaExperiment m = new MancalaExperiment(mm, ab, 7, 4, 100000);
+//		m.playGame();
+//		long timeDepth12 = System.currentTimeMillis() - startDepth12;
+//		System.out.println("Total time for 1 game of depth 12: " + timeDepth12);
+//		System.out.println("NodesAB in 1sec " + sumOfDepth12NodesAB / (timeDepth12/ 1000));
+//		System.out.println("NodesMM in 1sec " + sumOfDepth12NodesMM / (timeDepth12/ 1000));
+//		System.out.println("Depth12AvgBrachingFactor " + sumOfDepth12AvgBrachingFactor);
+//		System.out.println("Depth12EffBrachingFactor " + sumOfDepth12EffectiveBrachingFactorAB);
+		
+		long startDepth3 =  System.currentTimeMillis();
+		for (int i = 0; i < 100; i++) {
+			MMMancaPlayer mm = new MMMancaPlayer("MinimaxPlayer", 6);
+			ABMancaPlayer ab = new ABMancaPlayer("ABMancaPlayer", 6);
+			MancalaExperiment m = new MancalaExperiment(mm, ab, 7, 4, 100000);
+			m.playGame();
+		}
+		long timeDepth3 = System.currentTimeMillis() - startDepth3;
+		System.out.println("Total time for 100 game of depth 6: " + timeDepth3);
+		System.out.println("NodesAB in 1sec " + sumOfDepth3NodesAB / (timeDepth3/ 1000));
+		System.out.println("NodesMM in 1sec " + sumOfDepth3NodesMM / (timeDepth3/ 1000));
+		System.out.println("Depth6AvgBrachingFactor " + sumOfDepth3AvgBrachingFactor / 100);
+		System.out.println("Depth6EffBrachingFactor " + sumOfDepth3EffectiveBrachingFactorAB / 100);
+		
+//		long startDepth3 =  System.currentTimeMillis();
+//		for (int i = 0; i < 1000; i++) {
+//			MMMancaPlayer mm = new MMMancaPlayer("MinimaxPlayer", 3);
+//			ABMancaPlayer ab = new ABMancaPlayer("ABMancaPlayer", 3);
+//			MancalaExperiment m = new MancalaExperiment(mm, ab, 7, 4, 100000);
+//			m.playGame();
+//		}
+//		long timeDepth3 = System.currentTimeMillis() - startDepth3;
+//		System.out.println("Total time for 1000 game of depth 3: " + timeDepth3);
+//		System.out.println("NodesAB in 1sec " + sumOfDepth3NodesAB / (timeDepth3/ 1000));
+//		System.out.println("NodesMM in 1sec " + sumOfDepth3NodesMM / (timeDepth3/ 1000));
+//		System.out.println("Depth6AvgBrachingFactor " + sumOfDepth3AvgBrachingFactor / 1000);
+//		System.out.println("Depth6EffBrachingFactor " + sumOfDepth3EffectiveBrachingFactorAB / 1000);
+		
+//		long startDepth3 =  System.currentTimeMillis();
+//		for (int i = 0; i < 10; i++) {
+//			MMMancaPlayer mm = new MMMancaPlayer("MinimaxPlayer", 9);
+//			ABMancaPlayer ab = new ABMancaPlayer("ABMancaPlayer", 9);
+//			MancalaExperiment m = new MancalaExperiment(mm, ab, 7, 4, 100000);
+//			m.playGame();
+//		}
+//		long timeDepth3 = System.currentTimeMillis() - startDepth3;
+//		System.out.println("Total time for 10 games of depth 9: " + timeDepth3);
+//		System.out.println("NodesAB in 1sec " + sumOfDepth3NodesAB / (timeDepth3/ 1000));
+//		System.out.println("NodesMM in 1sec " + sumOfDepth3NodesMM / (timeDepth3/ 1000));
+//		System.out.println("Depth6AvgBrachingFactor " + sumOfDepth3AvgBrachingFactor / 10);
+//		System.out.println("Depth6EffBrachingFactor " + sumOfDepth3EffectiveBrachingFactorAB / 10);
+		
+//		System.out.println("Depth6AvgBrachingFactor " + sumOfDepth6AvgBrachingFactor / 2 );
+//		System.out.println("Depth6AvgBrachingFactor " + sumOfDepth6EffectiveBrachingFactorAB / 2);
+		//time
+		
+		
+		// time
+		// 8 games depth = 2 - add up all generated nodes / time; sum of branching factors / games
+		// 4 games depth = 6 - 
+		// 2 game depth = 12
+		
+		//b^d = nodes => d = logb(nodes)
+		// nodes / node per second = second to go to depth d
+		
+		//2. D(mm) = logb(mm)(nodes in T)
+		// nodes per second * T = nodes
+		// D(ab) = logb(ab)(nodes in T)
+//		12 in 2s (mm)
+		
+
 	}
 
 	public MancalaExperiment(MancalaPlayer p1, MancalaPlayer p2, int size, int startingStones, int time) {
@@ -36,7 +123,6 @@ public class MancalaExperiment {
 			top = p1;
 		}
 		GameState g = new GameState(size, startingStones);
-		long experimentDdl = System.currentTimeMillis() + time;
 		while (!g.isGameOver() /*&& experimentDdl - System.currentTimeMillis() > 500 */) {
 			moveCount++;
 			GameThread t;
@@ -85,10 +171,14 @@ public class MancalaExperiment {
 //		}
 //		return g.getFinalNetScore();
 		// branching facvtor of mancala game - for a particular player??
+		sumOfDepth12NodesAB += ((MiniMax) p2).getNodesGenerated();
+		sumOfDepth12AvgBrachingFactor += ((MiniMax) p1).getAveBranchingFactor();
+		sumOfDepth12NodesMM += ((MiniMax) p1).getNodesGenerated();
+		sumOfDepth12EffectiveBrachingFactorAB += ((MiniMax) p2).getEffectiveBranchingFactor();
 		System.out.println(p1.name + " generated " + ((MiniMax) p1).getNodesGenerated());
 		System.out.println(p2.name + " generated " + ((MiniMax) p2).getNodesGenerated());
 		System.out.println(p1.name + " has an avg branching factor of " + ((MiniMax) p1).getAveBranchingFactor());
-		System.out.println(p2.name + " has an avg branching factor of " + ((MiniMax) p2).getAveBranchingFactor());
+//		System.out.println(p2.name + " has an avg branching factor of " + ((MiniMax) p2).getAveBranchingFactor());
 		System.out.println(p1.name + " has an effective branching factor of " + ((MiniMax) p1).getEffectiveBranchingFactor());
 		System.out.println(p2.name + " has an effective branching factor of " + ((MiniMax) p2).getEffectiveBranchingFactor());
 	}

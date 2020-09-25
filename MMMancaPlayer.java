@@ -9,9 +9,10 @@ import java.util.ArrayList;
 public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 	
 	private final long MAX_DEPTH;
-	private int generatedNodes = 0;
-	private int expandedNodes = 0;
-	private int staticEvaluations = 0;
+	private double generatedNodes = 0;
+	// internal nodes
+	private double expandedNodes = 0;
+	private double staticEvaluations = 0;
 	
 	public MMMancaPlayer(String name) {
 		super.verbose = false;
@@ -40,43 +41,42 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		Move bestMove = null;
 		expandedNodes += 1;
 		System.out.println("calling get move");
-//		while(deadline-System.currentTimeMillis() > 500) { //this doesnt affect recursive calls?
-			if (g.isBottomTurn) {
-				//call minPlayer
-				double bestVal = Double.NEGATIVE_INFINITY;
-				ArrayList<Move> validMoves =g.getLegalMoves();
-				System.out.println(validMoves.size());
-				for (Move move: validMoves) {
-					System.out.println("checking move");
-					GameState next = g.makeMove(move);
-					generatedNodes += 1;
-					// pass the depth
-					double curVal = minPlayer(next, 0);
-					if (curVal > bestVal) {
-						bestMove = move;
-						bestVal = curVal;
-					}
+		if (g.isBottomTurn) {
+			//call minPlayer
+			double bestVal = Double.NEGATIVE_INFINITY;
+			ArrayList<Move> validMoves =g.getLegalMoves();
+			System.out.println(validMoves.size());
+			for (Move move: validMoves) {
+				System.out.println("checking move");
+				GameState next = g.makeMove(move);
+				generatedNodes += 1;
+				// pass the depth
+				double curVal = minPlayer(next, 0);
+				if (curVal > bestVal) {
+					bestMove = move;
+					bestVal = curVal;
 				}
 			}
-			else {
-				// call maxPlayer
-				double bestVal = Double.POSITIVE_INFINITY;
-				ArrayList<Move> validMoves =g.getLegalMoves();
-				System.out.println(validMoves.size());
-				for (Move move: validMoves) {
-					System.out.println("checking move");
-					GameState next = g.makeMove(move);
-					generatedNodes += 1;
-					// pass the depth
-					double curVal = maxPlayer(next, 0);
-					if (curVal < bestVal) {
-						bestMove = move;
-						bestVal = curVal;
-					}
+		}
+		else {
+			// call maxPlayer
+			double bestVal = Double.POSITIVE_INFINITY;
+			ArrayList<Move> validMoves =g.getLegalMoves();
+			System.out.println(validMoves.size());
+			for (Move move: validMoves) {
+//					System.out.println("checking move");
+				GameState next = g.makeMove(move);
+				generatedNodes += 1;
+				// pass the depth
+				double curVal = maxPlayer(next, 0);
+				if (curVal < bestVal) {
+					bestMove = move;
+					bestVal = curVal;
 				}
 			}
+		}
 //		}
-		System.out.println("best move found");
+//		System.out.println("best move found");
 		return bestMove;
 	}
 	
@@ -89,7 +89,10 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		if (verbose) {
 //			System.out.println("Reaching depth " + depth);
 		}
-		if (curState.isGameOver() || depth == MAX_DEPTH) {
+		if (curState.isGameOver()) {
+			return curState.getFinalNetScore();
+		}
+		if (depth == MAX_DEPTH) {
 //			System.out.println("Gameover at depth " + depth);
 			return staticEvaluator(curState);
 		}
@@ -119,7 +122,10 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		if (verbose) {
 			System.out.println("Reaching depth " + depth);
 		}
-		if (curState.isGameOver() || depth == MAX_DEPTH) {
+		if (curState.isGameOver()) {
+			return curState.getFinalNetScore();
+		}
+		if (depth == MAX_DEPTH) {
 //			System.out.println("Gameover at depth " + depth);
 			return staticEvaluator(curState);
 		}
@@ -145,22 +151,22 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		// TODO Auto-generated method stub
 		// number of pieces to own
 		staticEvaluations += 1;
-		return state.getPlayerScore(true);
+		return state.currentScore();
 	}
 	@Override
 	public int getNodesGenerated() {
 		// TODO Auto-generated method stub
-		return generatedNodes;
+		return (int) generatedNodes;
 	}
 	@Override
 	public int getStaticEvaluations() {
 		// TODO Auto-generated method stub
-		return staticEvaluations;
+		return (int) staticEvaluations;
 	}
 	@Override
 	public double getAveBranchingFactor() {
 		// TODO Auto-generated method stub
-		return (double) generatedNodes / (double) expandedNodes;
+		return generatedNodes / expandedNodes;
 	}
 	@Override
 	public double getEffectiveBranchingFactor() {
