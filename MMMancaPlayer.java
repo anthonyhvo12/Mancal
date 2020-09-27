@@ -81,7 +81,7 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 	}
 	
 	/**
-	 * Return the min value of game states starting from a certain depth.
+	 * Return the min value of nodes starting from a certain depth.
 	 * @curState the current state 
 	 * @depth current depth in the game tree
 	 */
@@ -114,7 +114,7 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 	}
 	
 	/**
-	 * Return the max value of game states starting from a certain depth.
+	 * Return the max value of nodes starting from a certain depth.
 	 * @curState the current state 
 	 * @depth current depth in the game tree
 	 */

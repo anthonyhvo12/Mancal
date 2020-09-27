@@ -27,6 +27,11 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 	}
 	
 	@Override
+	/**
+	 * Return the player's move
+	 * @g the GameState to make a move
+	 * @deadline the system time when it must return by
+	 */
 	public Move getMove(GameState g, long deadline) {
 		// TODO Auto-generated method stub
 		Move bestMove = null;
@@ -71,6 +76,11 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 		return bestMove;
 	}
 	
+	/**
+	 * Return the min value of nodes starting from a certain depth by using alpha and beta.
+	 * @curState the current state 
+	 * @depth current depth in the game tree
+	 */
 	private double minPlayer(GameState  curState, long depth, double alpha, double beta) {
 		if (verbose) {
 			System.out.println("Reaching depth " + depth);
@@ -102,6 +112,11 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 		return beta;
 	}
 
+	/**
+	 * Return the max value of nodes starting from a certain depth by using alpha and beta.
+	 * @curState the current state 
+	 * @depth current depth in the game tree
+	 */
 	private double maxPlayer(GameState curState, long depth, double alpha, double beta) {
 		if (verbose) {
 			System.out.println("Reaching depth " + depth);
