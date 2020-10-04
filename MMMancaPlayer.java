@@ -24,13 +24,6 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		MAX_DEPTH = depthLimit;
 	}
 
-	/*
-	 * min - max: gamestate
-	 * minplayer fn vs maxplayer fn
-	 * know which depth
-	 * sibling nodes - same depth
-	 */
-
 	@Override
 	/**
 	 * Return the player's move
@@ -40,14 +33,13 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 	public Move getMove(GameState g, long deadline) {
 		Move bestMove = null;
 		expandedNodes += 1;
-		System.out.println("calling get move");
+//		System.out.println("calling get move");
 		if (g.isBottomTurn) {
-			//call minPlayer
 			double bestVal = Double.NEGATIVE_INFINITY;
 			ArrayList<Move> validMoves =g.getLegalMoves();
-			System.out.println(validMoves.size());
+//			System.out.println(validMoves.size());
 			for (Move move: validMoves) {
-				System.out.println("checking move");
+//				System.out.println("checking move");
 				GameState next = g.makeMove(move);
 				generatedNodes += 1;
 				// pass the depth
@@ -59,10 +51,9 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 			}
 		}
 		else {
-			// call maxPlayer
 			double bestVal = Double.POSITIVE_INFINITY;
 			ArrayList<Move> validMoves =g.getLegalMoves();
-			System.out.println(validMoves.size());
+//			System.out.println(validMoves.size());
 			for (Move move: validMoves) {
 //					System.out.println("checking move");
 				GameState next = g.makeMove(move);
@@ -75,8 +66,6 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 				}
 			}
 		}
-//		}
-//		System.out.println("best move found");
 		return bestMove;
 	}
 	
@@ -144,6 +133,14 @@ public class MMMancaPlayer extends MancalaPlayer implements MiniMax {
 		}
 		
 		return bestVal;
+	}
+	
+	/*
+	 *  This function returns the correct number of generated nodes - the one from the 
+	 *  MiniMax interface will overflow
+	 */
+	public double getCorrectNodesGenerated() {
+		return generatedNodes;
 	}
 	
 	@Override

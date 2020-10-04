@@ -38,7 +38,6 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 		expandedNodes += 1;
 		System.out.println("calling get move");
 		if (g.isBottomTurn) {
-			//call minPlayer
 			double bestVal = Double.NEGATIVE_INFINITY;
 			ArrayList<Move> validMoves =g.getLegalMoves();
 			for (Move move: validMoves) {
@@ -46,9 +45,7 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 				GameState next = g.makeMove(move);
 				generatedNodes += 1; 
 				visitedNodes += 1;
-				// pass the depth
-				// TOASK: depth = 0 or = 1
-				double curVal = minPlayer(next, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+				double curVal = minPlayer(next, 0, bestVal, Double.POSITIVE_INFINITY);
 				if (curVal > bestVal) {
 					bestMove = move;
 					bestVal = curVal;
@@ -56,7 +53,6 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 			}
 		}
 		else {
-			// call maxPlayer
 			double bestVal = Double.POSITIVE_INFINITY;
 			ArrayList<Move> validMoves =g.getLegalMoves();
 			for (Move move: validMoves) {
@@ -64,22 +60,22 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 				GameState next = g.makeMove(move);
 				generatedNodes += 1;
 				visitedNodes += 1;
-				// pass the depth
-				double curVal = maxPlayer(next, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+				double curVal = maxPlayer(next, 0, Double.NEGATIVE_INFINITY, bestVal);
 				if (curVal < bestVal) {
 					bestMove = move;
 					bestVal = curVal;
 				}
 			}
 		}
-		System.out.println("best move found");
 		return bestMove;
 	}
 	
 	/**
-	 * Return the min value of nodes starting from a certain depth by using alpha and beta.
+	 * Return the min value of nodes starting from a certain depth with alpha and beta pruning.
 	 * @curState the current state 
 	 * @depth current depth in the game tree
+	 * @alpha the lower limit
+	 * @beta the upper limit
 	 */
 	private double minPlayer(GameState  curState, long depth, double alpha, double beta) {
 		if (verbose) {
@@ -113,9 +109,11 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 	}
 
 	/**
-	 * Return the max value of nodes starting from a certain depth by using alpha and beta.
+	 * Return the max value of nodes starting from a certain depth with alpha and beta pruning.
 	 * @curState the current state 
 	 * @depth current depth in the game tree
+	 * @alpha the lower limit
+	 * @beta the upper limit
 	 */
 	private double maxPlayer(GameState curState, long depth, double alpha, double beta) {
 		if (verbose) {
@@ -146,6 +144,13 @@ public class ABMancaPlayer extends MancalaPlayer implements MiniMax {
 		}
 		
 		return alpha;
+	}
+	/*
+	 *  This function returns the correct number of generated nodes - the one from the 
+	 *  MiniMax interface will overflow
+	 */
+	public double getCorrectNodesGenerated() {
+		return generatedNodes;
 	}
 	
 	@Override

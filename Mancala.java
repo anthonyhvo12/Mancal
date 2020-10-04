@@ -21,11 +21,20 @@ public class Mancala {
 		ABMancaPlayer ab = new ABMancaPlayer("ab", 10);
 		NearRandomPlayer nrp = new NearRandomPlayer();
 		OneMovePlayer omp = new OneMovePlayer();
+		AEDaBestMancalaPlayer aed = new AEDaBestMancalaPlayer("aed", 10);
 //		Mancala m = new Mancala(hu, hu, 7,4,100000);
 //		Mancala m = new Mancala(mm, ab, 7,4,100000);
 //		Mancala m = new Mancala(nrp, mm, 7,4,1000);
 //		Mancala m = new Mancala(nrp, mm, 7,4,1000);
-		Mancala m = new Mancala(ab, nrp, 7,4,1000);
+//		Mancala m = new Mancala(mm, omp, 7,4,1000);
+//		Mancala m = new Mancala(aed, omp, 7,4,1000);
+//		Mancala m = new Mancala(aed, mm, 7,4,1000);
+//		Mancala m = new Mancala(aed, rp, 7,4,1000);
+//		Mancala m = new Mancala(ab, aed, 7,4,1000);
+//		Mancala m = new Mancala(mm, aed, 7,4,1000);
+//		Mancala m = new Mancala(aed, ab, 7,4,1000);
+//		Mancala m = new Mancala(nrp, ab, 7,4,1000);
+		Mancala m = new Mancala(aed, nrp, 7,4,1000);
 		m.playGame();		
 	}
 
